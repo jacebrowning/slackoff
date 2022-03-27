@@ -1,3 +1,7 @@
+on activate()
+	tell application "Slack" to activate
+end activate
+
 on signin(workspace)
 	tell application "System Events"
 		tell its process "Slack"

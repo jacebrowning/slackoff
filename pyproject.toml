@@ -1,7 +1,7 @@
 [tool.poetry]
 
 name = "slackoff"
-version = "0.0.1"
+version = "0.0.2"
 description = "Automatically sign out of Slack workspaces."
 
 license = "MIT"
