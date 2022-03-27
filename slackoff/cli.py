@@ -7,7 +7,7 @@ from . import __version__, slack
 
 
 @click.command(help="Automatically sign out/in of a Slack workspace.")
-@click.argument("workspace", nargs=-1)
+@click.argument("workspace", nargs=-1, required=True)
 @click.option(
     "--toggle/--no-toggle",
     default=True,
