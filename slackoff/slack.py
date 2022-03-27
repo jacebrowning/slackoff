@@ -11,13 +11,13 @@ def activate() -> bool:
     return result.code == 0
 
 
-def signin_workspace(name: str) -> bool:
+def signin(workspace: str) -> bool:
     functions = FUNCTIONS.read_text("utf-8")
-    result = applescript.run(functions + f' signin("{name}")')
+    result = applescript.run(functions + f' signin("{workspace}")')
     return result.code == 0
 
 
-def signout_workspace(name: str) -> bool:
+def signout(workspace: str) -> bool:
     functions = FUNCTIONS.read_text("utf-8")
-    result = applescript.run(functions + f' signout("{name}")')
+    result = applescript.run(functions + f' signout("{workspace}")')
     return result.code == 0

@@ -1,8 +1,8 @@
 [tool.poetry]
 
 name = "slackoff"
-version = "0.0.2"
-description = "Automatically sign out of Slack workspaces."
+version = "0.0.3"
+description = "Automatically sign out of Slack workspaces on macOS."
 
 license = "MIT"
 
@@ -17,13 +17,16 @@ repository = "https://github.com/jacebrowning/slackoff"
 keywords = [
 ]
 classifiers = [
-    # TODO: update this list to match your application: https://pypi.org/pypi?%3Aaction=list_classifiers
-    "Development Status :: 1 - Planning",
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
-    "Operating System :: OS Independent",
+    "Operating System :: MacOS",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
+    "Topic :: Communications :: Chat",
 ]
 
 [tool.poetry.dependencies]

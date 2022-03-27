@@ -3,28 +3,35 @@ import sys
 import click
 import log
 
-from . import utils
+from . import __version__, slack
 
 
-@click.command()
-@click.argument("name")
-@click.option("--toggle/--no-toggle", default=True)
+@click.command(help="Automatically sign out/in of a Slack workspace.")
+@click.argument("workspace", nargs=-1)
+@click.version_option(__version__)
+@click.option(
+    "--toggle/--no-toggle",
+    default=True,
+    help="Sign in if already signed out.",
+)
 @click.option("--activate/--no-activate", default=True, hidden=True)
-def main(name: str = "", activate: bool = True, toggle: bool = True):
+def main(workspace: str, activate: bool, toggle: bool):
     log.init()
 
-    if activate and not utils.activate():
+    workspace = " ".join(workspace)
+
+    if activate and not slack.activate():
         click.echo("Unable to automate Slack")
         sys.exit(1)
 
-    if utils.signout_workspace(name):
-        click.echo(f"Signed out of {name}")
+    if slack.signout(workspace):
+        click.echo(f"Signed out of {workspace}")
         sys.exit(0)
 
-    click.echo(f"Already signed out of {name}")
+    click.echo(f"Already signed out of {workspace}")
     if toggle:
-        utils.signin_workspace(name)
+        slack.signin(workspace)
 
 
 if __name__ == "__main__":  # pragma: no cover
-    main()
+    main()  # pylint: disable=no-value-for-parameter
