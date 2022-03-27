@@ -1,8 +1,8 @@
 [tool.poetry]
 
 name = "slackoff"
-version = "0.0"
-description = "Automate Slack workspaces."
+version = "0.0.1"
+description = "Automatically sign out of Slack workspaces."
 
 license = "MIT"
 
@@ -30,9 +30,9 @@ classifiers = [
 
 python = "^3.10"
 
-# TODO: Remove these and add your library's requirements
 click = "*"
 minilog = "*"
+applescript = "^2021.2.9"
 
 [tool.poetry.dev-dependencies]
 

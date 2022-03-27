@@ -1,4 +1,3 @@
-"""Sample integration test module using pytest-describe and expecter."""
 # pylint: disable=redefined-outer-name,unused-variable,expression-not-assigned
 
 import pytest
@@ -14,15 +13,9 @@ def runner():
 
 
 def describe_cli():
-    def describe_conversion():
-        def when_integer(runner):
-            result = runner.invoke(main, ["42"])
+    def describe_signout():
+        def it_can_force_signin(runner):
+            result = runner.invoke(main, ["Foobar", "--no-toggle"])
 
             expect(result.exit_code) == 0
-            expect(result.output) == "12.80165\n"
-
-        def when_invalid(runner):
-            result = runner.invoke(main, ["foobar"])
-
-            expect(result.exit_code) == 0
-            expect(result.output) == ""
+            expect(result.output) == "Already signed out of Foobar\n"

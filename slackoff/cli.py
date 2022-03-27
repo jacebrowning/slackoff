@@ -1,5 +1,3 @@
-"""A sample CLI."""
-
 import click
 import log
 
@@ -7,14 +5,17 @@ from . import utils
 
 
 @click.command()
-@click.argument("feet")
-def main(feet=None):
+@click.argument("name")
+@click.option("--toggle/--no-toggle", default=True)
+def main(name: str = "", toggle: bool = False):
     log.init()
 
-    meters = utils.feet_to_meters(feet)
-
-    if meters is not None:
-        click.echo(meters)
+    if utils.signout_workspace(name):
+        click.echo(f"Signed out of {name}")
+    else:
+        click.echo(f"Already signed out of {name}")
+        if toggle:
+            utils.signin_workspace(name)
 
 
 if __name__ == "__main__":  # pragma: no cover

@@ -1,14 +1,17 @@
-"""A sample module."""
+from pathlib import Path
 
-import log
+import applescript
+
+FUNCTIONS = Path(__file__).parent / "slack.applescript"
 
 
-def feet_to_meters(feet):
-    """Convert feet to meters."""
-    try:
-        value = float(feet)
-    except ValueError:
-        log.error("Unable to convert to float: %s", feet)
-        return None
-    else:
-        return (0.3048 * value * 10000.0 + 0.5) / 10000.0
+def signin_workspace(name: str) -> bool:
+    functions = FUNCTIONS.read_text("utf-8")
+    result = applescript.run(functions + f' signin("{name}")')
+    return result.code == 0
+
+
+def signout_workspace(name: str) -> bool:
+    functions = FUNCTIONS.read_text("utf-8")
+    result = applescript.run(functions + f' signout("{name}")')
+    return result.code == 0

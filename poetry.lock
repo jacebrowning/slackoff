@@ -7,6 +7,14 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "applescript"
+version = "2021.2.9"
+description = "run applescript"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "appnope"
 version = "0.1.2"
 description = "Disable App Nap on macOS >= 10.9"
@@ -897,12 +905,15 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "dac3f6af1cbe65c7ee39917b41463ef32f8aad3a85ae802dd8fe8900a5895544"
+content-hash = "1e721dc6beb43b8984aefe136361a8dac04b0344701fd2edb38e2ef516c29b3f"
 
 [metadata.files]
 altgraph = [
     {file = "altgraph-0.17.2-py2.py3-none-any.whl", hash = "sha256:743628f2ac6a7c26f5d9223c91ed8ecbba535f506f4b6f558885a8a56a105857"},
     {file = "altgraph-0.17.2.tar.gz", hash = "sha256:ebf2269361b47d97b3b88e696439f6e4cbc607c17c51feb1754f90fb79839158"},
+]
+applescript = [
+    {file = "applescript-2021.2.9.tar.gz", hash = "sha256:e39542c0411d82c3c860af23f5a54c121279a409e5cf55acfa7f881ea9798854"},
 ]
 appnope = [
     {file = "appnope-0.1.2-py2.py3-none-any.whl", hash = "sha256:93aa393e9d6c54c5cd570ccadd8edad61ea0c4b9ea7a01409020c9aa019eb442"},
