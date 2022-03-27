@@ -1,0 +1,111 @@
+[tool.poetry]
+
+name = "slackoff"
+version = "0.0"
+description = "Automate Slack workspaces."
+
+license = "MIT"
+
+authors = ["Jace Browning <jacebrowning@gmail.com>"]
+
+readme = "README.md"
+
+homepage = "https://pypi.org/project/slackoff"
+documentation = "https://slackoff.readthedocs.io"
+repository = "https://github.com/jacebrowning/slackoff"
+
+keywords = [
+]
+classifiers = [
+    # TODO: update this list to match your application: https://pypi.org/pypi?%3Aaction=list_classifiers
+    "Development Status :: 1 - Planning",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+]
+
+[tool.poetry.dependencies]
+
+python = "^3.10"
+
+# TODO: Remove these and add your library's requirements
+click = "*"
+minilog = "*"
+
+[tool.poetry.dev-dependencies]
+
+# Formatters
+black = "^22.1"
+isort = "^5.10"
+
+# Linters
+mypy = "~0.931"
+pydocstyle = "^6.1"
+pylint = "~2.12.2"
+types-setuptools = "*"
+
+# Testing
+pytest = "^6.2"
+pytest-describe = "^2.0"
+pytest-expecter = "^2.3"
+pytest-random = "*"
+pytest-cov = "^2.12"
+freezegun = "*"
+
+# Reports
+coveragespace = "^4.0"
+
+# Documentation
+mkdocs = "~1.2.3"
+pygments = "^2.11.1"
+
+# Tooling
+pyinstaller = "*"
+sniffer = "*"
+MacFSEvents = { version = "*", platform = "darwin" }
+pync = { version = "*", platform = "darwin" }
+ipython = "^7.12.0"
+
+[tool.poetry.scripts]
+
+slackoff = "slackoff.cli:main"
+
+[tool.black]
+
+quiet = true
+
+[tool.isort]
+
+profile = "black"
+
+[tool.mypy]
+
+ignore_missing_imports = true
+no_implicit_optional = true
+check_untyped_defs = true
+
+cache_dir = ".cache/mypy/"
+
+[tool.pytest.ini_options]
+
+addopts = """
+--strict-markers
+
+-r sxX
+--show-capture=log
+
+--cov-report=html
+--cov-report=term-missing:skip-covered
+--no-cov-on-fail
+"""
+
+cache_dir = ".cache/pytest/"
+
+markers = []
+
+[build-system]
+
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
