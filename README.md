@@ -1,6 +1,6 @@
 # Overview
 
-Automatically sign out of Slack workspaces on macOS.
+Automatically sign out of Slack workspaces (on macOS) to minimize distractions during or after working hours.
 
 [![Build Status](https://img.shields.io/github/workflow/status/jacebrowning/slackoff/main)](https://github.com/jacebrowning/slackoff/actions)
 [![Coverage Status](https://img.shields.io/codecov/c/gh/jacebrowning/slackoff)](https://codecov.io/gh/jacebrowning/slackoff)
@@ -13,7 +13,7 @@ Automatically sign out of Slack workspaces on macOS.
 
 ## Requirements
 
-* macOS
+* macOS (for AppleScript)
 * Slack for Mac
 * Python 3.10+
 
