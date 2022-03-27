@@ -75,7 +75,7 @@ Run the program:
 
 ```text
 $ make run
-````
+```
 
 Launch an IPython session:
 
