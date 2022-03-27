@@ -29,6 +29,7 @@
     "python.formatting.blackPath": ".venv/bin/black",
     "cSpell.words": [
       "builtins",
+      "codecov",
       "codehilite",
       "cygstart",
       "cygwin",
@@ -40,6 +41,7 @@
       "ruamel",
       "signin",
       "slackoff",
+      "venv",
       "verchew"
     ]
   }
