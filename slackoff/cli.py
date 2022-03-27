@@ -4,10 +4,11 @@ import click
 import log
 
 from . import __version__, slack
+from .config import settings
 
 
 @click.command(help="Automatically sign out/in of a Slack workspace.")
-@click.argument("workspace", nargs=-1, required=True)
+@click.argument("workspace", nargs=-1)
 @click.option(
     "--toggle/--no-toggle",
     default=True,
@@ -19,11 +20,11 @@ from . import __version__, slack
 def main(workspace: str, activate: bool, toggle: bool, debug: bool):
     log.init(debug=debug, format="%(levelname)s: %(message)s")
 
-    workspace = " ".join(workspace)
-
     if activate and not slack.activate():
         click.echo("Unable to automate Slack")
         sys.exit(1)
+
+    workspace = get_workspace(workspace)
 
     if slack.signout(workspace):
         click.echo(f"Signed out of {workspace}")
@@ -32,6 +33,17 @@ def main(workspace: str, activate: bool, toggle: bool, debug: bool):
     click.echo(f"Already signed out of {workspace}")
     if toggle:
         slack.signin(workspace)
+
+
+def get_workspace(workspace):
+    workspace = " ".join(workspace)
+    if not workspace:
+        if settings.workspaces:
+            workspace = settings.workspaces[0]
+        else:
+            workspace = click.prompt("Slack workspace")
+            settings.workspaces = [workspace]
+    return workspace
 
 
 if __name__ == "__main__":  # pragma: no cover
