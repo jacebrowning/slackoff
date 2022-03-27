@@ -9,15 +9,15 @@ Automatically sign out of Slack workspaces (on macOS) to minimize distractions d
 [![PyPI Version](https://img.shields.io/pypi/v/slackoff.svg)](https://pypi.org/project/slackoff)
 [![PyPI Downloads](https://img.shields.io/pypi/dm/slackoff.svg?color=orange)](https://pypistats.org/packages/slackoff)
 
-# Setup
+## Setup
 
-## Requirements
+### Requirements
 
 * macOS (for AppleScript)
 * Slack for Mac
 * Python 3.10+
 
-## Installation
+### Installation
 
 Install this tool globally with [pipx](https://pipxproject.github.io/pipx/) (or pip):
 
@@ -30,7 +30,7 @@ or add it to your [Poetry](https://python-poetry.org/docs/) project:
 $ poetry add slackoff
 ```
 
-# Usage
+## Usage
 
 After installation, automatically sign out of a Slack workspace:
 
