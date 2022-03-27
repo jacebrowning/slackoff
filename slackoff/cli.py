@@ -8,15 +8,16 @@ from . import __version__, slack
 
 @click.command(help="Automatically sign out/in of a Slack workspace.")
 @click.argument("workspace", nargs=-1)
-@click.version_option(__version__)
 @click.option(
     "--toggle/--no-toggle",
     default=True,
     help="Sign in if already signed out.",
 )
 @click.option("--activate/--no-activate", default=True, hidden=True)
-def main(workspace: str, activate: bool, toggle: bool):
-    log.init()
+@click.option("--debug/--no-debug", default=False, help="Show verbose logging output.")
+@click.version_option(__version__)
+def main(workspace: str, activate: bool, toggle: bool, debug: bool):
+    log.init(debug=debug, format="%(levelname)s: %(message)s")
 
     workspace = " ".join(workspace)
 
