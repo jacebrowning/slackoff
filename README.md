@@ -2,7 +2,7 @@
 
 Automatically sign out of Slack workspaces on macOS.
 
-[![Build Status](https://img.shields.io/travis/com/jacebrowning/slackoff.svg?label=build)](https://travis-ci.com/jacebrowning/slackoff)
+[![Build Status](https://img.shields.io/github/workflow/status/jacebrowning/slackoff/main)](https://github.com/jacebrowning/slackoff/actions)
 [![Coverage Status](https://img.shields.io/codecov/c/gh/jacebrowning/slackoff)](https://codecov.io/gh/jacebrowning/slackoff)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/jacebrowning/slackoff.svg)](https://scrutinizer-ci.com/g/jacebrowning/slackoff)
 [![PyPI License](https://img.shields.io/pypi/l/slackoff.svg)](https://pypi.org/project/slackoff)
