@@ -10,9 +10,11 @@ from .config import settings
 @click.command(help="Automatically sign out/in of a Slack workspace.")
 @click.argument("workspace", nargs=-1)
 @click.option(
-    "--signout", is_flag=True, default=False, help="Only attempt to sign out."
+    "-o", "--signout", is_flag=True, default=False, help="Only attempt to sign out."
 )
-@click.option("--signin", is_flag=True, default=False, help="Only attempt to sign in.")
+@click.option(
+    "-i", "--signin", is_flag=True, default=False, help="Only attempt to sign in."
+)
 @click.option(
     "--debug", is_flag=True, default=False, help="Show verbose logging output."
 )
