@@ -35,11 +35,19 @@ $ poetry add slackoff
 After installation, automatically sign out of a Slack workspace:
 
 ```sh
-$ slackoff My Workspace Name
+$ slackoff My Company Name
 ```
 
 or sign back in:
 
 ```sh
-$ slackoff My Workspace Name
+$ slackoff
+```
+
+Slackoff will remember the last workspace used (if none is provied) and attempt to determine which action is required.
+
+To explicitly attempt to sign in or out, include the `--signin` or `--signout` flags, respectively. View the help for more options:
+
+```sh
+$ slackoff --help
 ```
