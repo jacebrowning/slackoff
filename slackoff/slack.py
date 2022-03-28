@@ -24,6 +24,7 @@ def _call(signature: str, show_error: bool = True) -> bool:
     log.debug(f"Calling AppleScript: {signature}")
     result = applescript.run(functions + "\n\n" + signature)
 
+    log.debug(f"AppleScript code: {result.code}")
     if result.out:
         log.debug(f"AppleScript output: {result.out}")
     if result.err:
@@ -32,4 +33,4 @@ def _call(signature: str, show_error: bool = True) -> bool:
             message = result.err.split("error:")[-1].strip()
             log.error(message)
 
-    return result.code == 0
+    return result.code == 0 and "missing value" not in result.out
