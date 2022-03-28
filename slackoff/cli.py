@@ -27,13 +27,16 @@ def main(workspace: str, signin: bool, signout: bool, debug: bool):
     if not (signin or signout) and not slack.activate():
         sys.exit(1)
 
-    if not signin and slack.signout(workspace):
-        click.echo(f"Signed out of {workspace}")
-        sys.exit(0)
+    if not signin:
+        if slack.signout(workspace):
+            click.echo(f"Signed out of {workspace}")
+            sys.exit(0)
+        else:
+            click.echo(f"Already signed out of {workspace}")
 
-    click.echo(f"Already signed out of {workspace}")
     if not signout:
-        slack.signin(workspace)
+        if not slack.signin(workspace):
+            click.echo(f"Click 'Open' to sign in to {workspace}")
 
 
 def get_workspace(workspace):
