@@ -42,6 +42,7 @@
       "pyenv",
       "ruamel",
       "signin",
+      "signout",
       "slackoff",
       "venv",
       "verchew"

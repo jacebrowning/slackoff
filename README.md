@@ -1,6 +1,6 @@
 # Overview
 
-Automatically sign out of Slack workspaces (on macOS) to minimize distractions during or after working hours.
+Slackoff is a quick way to sign out of a company Slack workspace at the end of the day to improve one's work-life balance. It can also be used to sign out of "fun" Slack workspaces to avoid distractions during normal working hours.
 
 [![Build Status](https://img.shields.io/github/workflow/status/jacebrowning/slackoff/main)](https://github.com/jacebrowning/slackoff/actions)
 [![Coverage Status](https://img.shields.io/codecov/c/gh/jacebrowning/slackoff)](https://codecov.io/gh/jacebrowning/slackoff)
@@ -35,7 +35,7 @@ $ poetry add slackoff
 After installation, automatically sign out of a Slack workspace:
 
 ```sh
-$ slackoff My Company Name
+$ slackoff My Company Workspace
 ```
 
 or sign back in:
@@ -44,9 +44,18 @@ or sign back in:
 $ slackoff
 ```
 
-Slackoff will remember the last workspace used (if none is provied) and attempt to determine which action is required.
+Slackoff will remember the last workspace used and attempt to toggle appropriately.
 
-To explicitly attempt to sign in or out, include the `--signin` or `--signout` flags, respectively. View the help for more options:
+### Additional Options
+
+To explicitly attempt to sign in or out, include the corresponding flag:
+
+```sh
+$ slackoff --signin
+$ slackoff --signout
+```
+
+View the help for more options:
 
 ```sh
 $ slackoff --help
