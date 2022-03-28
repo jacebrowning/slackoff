@@ -10,28 +10,27 @@ from .config import settings
 @click.command(help="Automatically sign out/in of a Slack workspace.")
 @click.argument("workspace", nargs=-1)
 @click.option(
-    "--toggle/--no-toggle",
-    default=True,
-    help="Sign in if already signed out.",
+    "--signout", is_flag=True, default=False, help="Only attempt to sign out."
 )
-@click.option("--activate/--no-activate", default=True, hidden=True)
-@click.option("--debug/--no-debug", default=False, help="Show verbose logging output.")
+@click.option("--signin", is_flag=True, default=False, help="Only attempt to sign in.")
+@click.option(
+    "--debug", is_flag=True, default=False, help="Show verbose logging output."
+)
 @click.version_option(__version__)
-def main(workspace: str, activate: bool, toggle: bool, debug: bool):
+def main(workspace: str, signin: bool, signout: bool, debug: bool):
     log.init(debug=debug, format="%(levelname)s: %(message)s")
-
-    if activate and not slack.activate():
-        click.echo("Unable to automate Slack")
-        sys.exit(1)
 
     workspace = get_workspace(workspace)
 
-    if slack.signout(workspace):
+    if not (signin or signout) and not slack.activate():
+        sys.exit(1)
+
+    if not signin and slack.signout(workspace):
         click.echo(f"Signed out of {workspace}")
         sys.exit(0)
 
     click.echo(f"Already signed out of {workspace}")
-    if toggle:
+    if not signout:
         slack.signin(workspace)
 
 

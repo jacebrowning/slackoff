@@ -1,5 +1,10 @@
 on activate()
 	tell application "Slack" to activate
+	tell application "System Events"
+		tell its process "Slack"
+			click menu bar item "Slack" of menu bar 1
+		end tell
+	end tell
 end activate
 
 on signin(workspace)

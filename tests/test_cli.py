@@ -15,7 +15,7 @@ def runner():
 def describe_cli():
     def describe_signout():
         def it_can_force_signin(runner):
-            result = runner.invoke(main, ["Foobar", "--no-activate", "--no-toggle"])
+            result = runner.invoke(main, ["Foobar", "--signout"])
 
             expect(result.exit_code) == 0
             expect(result.output) == "Already signed out of Foobar\n"
