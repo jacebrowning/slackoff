@@ -1,11 +1,10 @@
 on activate()
-	tell application "Slack" to activate
 	tell application "System Events"
 		tell its process "Slack"
-			click menu bar item "Slack" of menu bar 1
-			click menu bar item "Slack" of menu bar 1
+			click menu item "Forward" of menu 1 of menu bar item "History" of menu bar 1
 		end tell
 	end tell
+	tell application "Slack" to activate
 end activate
 
 on signin(workspace)
