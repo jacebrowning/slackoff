@@ -167,7 +167,7 @@ requests = ">=2.0,<3.0"
 
 [[package]]
 name = "datafiles"
-version = "1.3a1"
+version = "1.3b1"
 description = "File-based ORM for dataclasses."
 category = "main"
 optional = false
@@ -977,7 +977,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "5937901e6979ec5dcfdb07244be2abe81d30692b5fa88538ba3c657c0c0a5be5"
+content-hash = "7e9ead0c73405a66ff63f4427265efaae34b4be7221a812dfd6cfb5cadb61c39"
 
 [metadata.files]
 altgraph = [
@@ -1103,8 +1103,8 @@ coveragespace = [
     {file = "coveragespace-4.2.tar.gz", hash = "sha256:b23263b7b9689fd7ded975809b134453c0e0cdbf1dea6b60bf8ebed2c78f9270"},
 ]
 datafiles = [
-    {file = "datafiles-1.3a1-py3-none-any.whl", hash = "sha256:b3aac8d3f8a283bee087e7870dbaf7871379b19ecdc9193b0e675cf98965f0d2"},
-    {file = "datafiles-1.3a1.tar.gz", hash = "sha256:aed42df87a02b835125defb474bbb3bb2aeeb587c175e493308138be888b5651"},
+    {file = "datafiles-1.3b1-py3-none-any.whl", hash = "sha256:2b285a2a3a8222c9b8d9ebd7704005fa96a77a936fa8ec4713220bfb4e3ac661"},
+    {file = "datafiles-1.3b1.tar.gz", hash = "sha256:fd2345d2b8da90c64c8f7ca29fe770e9dd1e9804f448fda2db368472184b128a"},
 ]
 decorator = [
     {file = "decorator-5.1.1-py3-none-any.whl", hash = "sha256:b8c3f85900b9dc423225913c5aace94729fe1fa9763b38939a95226f02d37186"},
