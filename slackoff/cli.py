@@ -30,6 +30,7 @@ def main(workspace: str, signin: bool, signout: bool, debug: bool):
     if not signin:
         if slack.signout(workspace):
             click.echo(f"Signed out of {workspace}")
+            settings.deactivate(workspace)
             sys.exit(0)
         else:
             click.echo(f"Already signed out of {workspace}")
@@ -37,16 +38,17 @@ def main(workspace: str, signin: bool, signout: bool, debug: bool):
     if not signout:
         if not slack.signin(workspace):
             click.echo(f"Click 'Open' to sign in to {workspace}")
+        settings.activate(workspace)
 
 
-def get_workspace(workspace):
+def get_workspace(workspace: str) -> str:
     workspace = " ".join(workspace)
     if not workspace:
         if settings.workspaces:
-            workspace = settings.workspaces[0]
+            workspace = settings.workspaces[0].name
         else:
             workspace = click.prompt("Slack workspace")
-            settings.workspaces = [workspace]
+    log.debug(f"Modifying workspace: {workspace}")
     return workspace
 
 

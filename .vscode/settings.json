@@ -41,6 +41,7 @@
       "pipx",
       "pyenv",
       "ruamel",
+      "showfspath",
       "signin",
       "signout",
       "slackoff",
