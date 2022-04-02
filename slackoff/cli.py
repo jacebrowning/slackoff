@@ -10,10 +10,10 @@ from .config import settings
 @click.command(help="Automatically sign out/in of a Slack workspace.")
 @click.argument("workspace", nargs=-1)
 @click.option(
-    "-o", "--signout", is_flag=True, default=False, help="Only attempt to sign out."
+    "-i", "--signin", is_flag=True, default=False, help="Only attempt to sign in."
 )
 @click.option(
-    "-i", "--signin", is_flag=True, default=False, help="Only attempt to sign in."
+    "-o", "--signout", is_flag=True, default=False, help="Only attempt to sign out."
 )
 @click.option(
     "--debug", is_flag=True, default=False, help="Show verbose logging output."
@@ -27,29 +27,48 @@ def main(workspace: str, signin: bool, signout: bool, debug: bool):
     if not (signin or signout) and not slack.activate():
         sys.exit(1)
 
-    if not signin:
-        if slack.signout(workspace):
-            click.echo(f"Signed out of {workspace}")
-            settings.deactivate(workspace)
-            sys.exit(0)
-        else:
-            click.echo(f"Already signed out of {workspace}")
+    if signin:
+        attempt_signin(workspace)
+        sys.exit(0)
 
-    if not signout:
-        if not slack.signin(workspace):
-            click.echo(f"Click 'Open' to sign in to {workspace}")
-        settings.activate(workspace)
+    if signout:
+        attempt_signout(workspace)
+        sys.exit(0)
+
+    if not attempt_signout(workspace):
+        click.echo(f"Signing in to {workspace}")
+        attempt_signin(workspace)
 
 
 def get_workspace(workspace: str) -> str:
     workspace = " ".join(workspace)
+
     if not workspace:
         if settings.workspaces:
             workspace = settings.workspaces[0].name
         else:
             workspace = click.prompt("Slack workspace")
+
     log.debug(f"Modifying workspace: {workspace}")
     return workspace
+
+
+def attempt_signin(workspace) -> bool:
+    if not slack.signin(workspace):
+        click.echo(f"Click 'Open' to sign in to {workspace}")
+
+    settings.activate(workspace)
+    return True
+
+
+def attempt_signout(workspace) -> bool:
+    if slack.signout(workspace):
+        click.echo(f"Signed out of {workspace}")
+        settings.deactivate(workspace)
+        return True
+
+    click.echo(f"Currently signed out of {workspace}")
+    return False
 
 
 if __name__ == "__main__":  # pragma: no cover
