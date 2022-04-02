@@ -18,4 +18,4 @@ def describe_cli():
             result = runner.invoke(main, ["Foobar", "--signout"])
 
             expect(result.exit_code) == 0
-            expect(result.output) == "Already signed out of Foobar\n"
+            expect(result.output) == "Currently signed out of Foobar\n"

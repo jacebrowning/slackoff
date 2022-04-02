@@ -1,7 +1,7 @@
 [tool.poetry]
 
 name = "slackoff"
-version = "0.0.8"
+version = "0.0.9"
 description = "Automatically sign out of Slack workspaces on macOS."
 
 license = "MIT"
@@ -37,6 +37,7 @@ click = "*"
 minilog = "*"
 applescript = "^2021.2.9"
 datafiles = "^1.3b1"
+pync = "^2.0.3"
 
 [tool.poetry.dev-dependencies]
 
@@ -47,7 +48,7 @@ isort = "^5.10"
 # Linters
 mypy = "~0.931"
 pydocstyle = "^6.1"
-pylint = "~2.12.2"
+pylint = "~2.13.4"
 types-setuptools = "*"
 
 # Testing
@@ -69,7 +70,6 @@ pygments = "^2.11.1"
 pyinstaller = "*"
 sniffer = "*"
 MacFSEvents = { version = "*", platform = "darwin" }
-pync = { version = "*", platform = "darwin" }
 ipython = "^7.12.0"
 
 [tool.poetry.scripts]
@@ -91,6 +91,8 @@ no_implicit_optional = true
 check_untyped_defs = true
 
 cache_dir = ".cache/mypy/"
+
+plugins = "datafiles.plugins:mypy"
 
 [tool.pytest.ini_options]
 
