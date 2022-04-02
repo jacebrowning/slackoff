@@ -14,6 +14,10 @@ def signin(workspace: str) -> bool:
     return _call(f'signin("{workspace}")')
 
 
+def close() -> bool:
+    return _call("close()")
+
+
 def signout(workspace: str) -> bool:
     return _call(f'signout("{workspace}")', show_error=False)
 

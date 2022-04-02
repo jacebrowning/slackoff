@@ -18,11 +18,18 @@ on signin(workspace)
     tell application "Google Chrome"
         tell active tab of front window
             execute javascript "document.evaluate('//div[text()=\"" & workspace & "\"]', document).iterateNext().click();"
-            delay 2
+            delay 1
             execute javascript "document.querySelectorAll('[data-qa=\"ssb_multi_select_open_workspaces\"]')[0].click();"
         end tell
     end tell
 end signin
+
+on close()
+    tell application "Google Chrome"
+            close every tab of window 1 whose title is equal to "Login | Slack"
+            close every tab of window 1 whose title is equal to "Redirecting… | Slack"
+    end tell
+end close
 
 on signout(workspace)
     tell application "System Events"
@@ -34,8 +41,6 @@ on signout(workspace)
     set closeTab to "Sign out | " & workspace & " Slack" as string
     tell application "Google Chrome"
         close every tab of window 1 whose title is equal to closeTab
-        close every tab of window 1 whose title is equal to "Login | Slack"
-        close every tab of window 1 whose title is equal to "Redirecting… | Slack"
     end tell
     tell application "Slack" to activate
 end signout

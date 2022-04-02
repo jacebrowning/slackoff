@@ -679,7 +679,7 @@ testutil = ["gitpython (>3)"]
 name = "pync"
 version = "2.0.3"
 description = "Python Wrapper for Mac OS 10.10 Notification Center"
-category = "dev"
+category = "main"
 optional = false
 python-versions = "*"
 
@@ -768,7 +768,7 @@ pytest = ">=2.2.3"
 name = "python-dateutil"
 version = "2.8.2"
 description = "Extensions to the standard Python datetime module"
-category = "dev"
+category = "main"
 optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7"
 
@@ -855,7 +855,7 @@ python-versions = ">=3.5"
 name = "six"
 version = "1.16.0"
 description = "Python 2 and 3 compatibility utilities"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
 
@@ -992,7 +992,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "5d4afe78cb9a1fab859bda09ab6511260a7c5b17a1f5b5b25d51b7c018eb5e09"
+content-hash = "758b9f410f48933a86d92648c91a91661b1df0d13b4860284fc4f744fcb377b0"
 
 [metadata.files]
 altgraph = [

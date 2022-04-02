@@ -40,6 +40,7 @@
       "noclasses",
       "pipx",
       "pyenv",
+      "pync",
       "ruamel",
       "showfspath",
       "signin",
