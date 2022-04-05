@@ -6,6 +6,7 @@ from datafiles import datafile, field
 class Workspace:
     name: str
     active: bool = True
+    uses: int = 0
 
 
 @datafile("~/Library/Preferences/slackoff.yml")
@@ -14,7 +15,8 @@ class Settings:
 
     def activate(self, name: str):
         log.debug(f"Marking workspace active: {name}")
-        self._update(name, True)
+        workspace = self._update(name, True)
+        workspace.uses += 1
 
     def deactivate(self, name: str):
         log.debug(f"Marking workspace inactive: {name}")
@@ -24,9 +26,11 @@ class Settings:
         for workspace in self.workspaces:
             if workspace.name == name:
                 workspace.active = active
-                break
-        else:
-            self.workspaces.append(Workspace(name, active))
+                return workspace
+
+        workspace = Workspace(name, active)
+        self.workspaces.append(workspace)
+        return workspace
 
 
 settings = Settings()

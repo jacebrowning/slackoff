@@ -4,7 +4,7 @@ import click
 import log
 import pync
 
-from . import __version__, slack
+from . import __version__, browser, slack
 from .config import settings
 
 
@@ -60,7 +60,7 @@ def attempt_signin(workspace) -> bool:
         pync.notify(message, title="Slackoff")
         click.echo(message)
         click.pause()
-        slack.close()  # TODO: Move this to browser utils
+        browser.close()
 
     settings.activate(workspace)
     return True

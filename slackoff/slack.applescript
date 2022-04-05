@@ -24,13 +24,6 @@ on signin(workspace)
     end tell
 end signin
 
-on close()
-    tell application "Google Chrome"
-            close every tab of window 1 whose title is equal to "Login | Slack"
-            close every tab of window 1 whose title is equal to "Redirecting… | Slack"
-    end tell
-end close
-
 on signout(workspace)
     tell application "System Events"
         tell its process "Slack"
