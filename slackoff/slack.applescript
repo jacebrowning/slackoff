@@ -7,6 +7,15 @@ on activate()
     tell application "Slack" to activate
 end activate
 
+
+on ready(workspace)
+    tell application "System Events"
+        tell its process "Slack"
+            get name of menu item workspace of menu 1 of menu item "Workspace" of menu 1 of menu bar item "File" of menu bar 1
+        end tell
+    end tell
+end ready
+
 on signin(workspace)
     tell application "System Events"
         tell its process "Slack"
