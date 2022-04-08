@@ -1,4 +1,6 @@
 import sys
+import time
+from contextlib import suppress
 
 import click
 import log
@@ -57,9 +59,17 @@ def get_workspace(workspace: str) -> str:
 def attempt_signin(workspace) -> bool:
     if not slack.signin(workspace):
         message = f"Click 'Open' to sign in to {workspace}"
-        pync.notify(message, title="Slackoff")
-        click.echo(message)
-        click.pause()
+
+        if not slack.ready(workspace):
+            pync.notify(message, title="Slackoff")
+            click.echo(message + "...")
+
+        with suppress(KeyboardInterrupt):
+            while not slack.ready(workspace):
+                log.debug(f"Waiting for workspace: {workspace}")
+                time.sleep(1)
+            click.echo(f"Signed in to of {workspace}")
+
         browser.close()
 
     settings.activate(workspace)

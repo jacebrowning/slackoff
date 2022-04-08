@@ -9,6 +9,10 @@ def activate() -> bool:
     return script.call(FUNCTIONS, "activate()")
 
 
+def ready(workspace: str) -> bool:
+    return script.call(FUNCTIONS, f'ready("{workspace}")', show_error=False)
+
+
 def signin(workspace: str) -> bool:
     return script.call(FUNCTIONS, f'signin("{workspace}")')
 
