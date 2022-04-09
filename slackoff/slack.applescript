@@ -39,7 +39,7 @@ on signout(workspace)
             click menu item workspace of menu 1 of menu item "Sign Out" of menu 1 of menu bar item "Slack" of menu bar 1
         end tell
     end tell
-    delay 2
+    delay 3
     set closeTab to "Sign out | " & workspace & " Slack" as string
     tell application "Google Chrome"
         close every tab of window 1 whose title is equal to closeTab

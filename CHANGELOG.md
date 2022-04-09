@@ -1,5 +1,5 @@
 # Release Notes
 
-## 0.1 (YYYY-MM-DD)
+## 0.1 (2022-04-08)
 
- - TBD
+ - Initial public release.
