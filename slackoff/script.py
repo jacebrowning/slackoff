@@ -4,8 +4,21 @@ import applescript
 import log
 
 
-def call(path: Path, signature: str, *, show_error: bool = True) -> bool:
+def call(
+    path: Path,
+    signature: str,
+    replacements: dict | None = None,
+    *,
+    show_error: bool = True,
+) -> bool:
     functions = path.read_text("utf-8")
+
+    if replacements is None:
+        replacements = {}
+    for old, new in replacements.items():
+        if old != new:
+            functions = functions.replace(old, new)
+            log.debug(f"Replaced {old!r} => {new!r}")
 
     log.debug(f"Calling AppleScript: {signature}")
     result = applescript.run(functions + "\n\n" + signature)
