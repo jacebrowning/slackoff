@@ -22,7 +22,7 @@ on signin(workspace)
             click menu item "Sign in to Another Workspace…" of menu 1 of menu item "Workspace" of menu 1 of menu bar item "File" of menu bar 1
         end tell
     end tell
-    delay 2
+    delay 3
     tell application "Google Chrome" to activate
     tell application "Google Chrome"
         tell active tab of front window
