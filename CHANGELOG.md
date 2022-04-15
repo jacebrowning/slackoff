@@ -1,6 +1,6 @@
 # Release Notes
 
-## 0.1.1 (2022-04-10)
+## 0.2 (next)
 
 - Added logic to detect the default browser.
 

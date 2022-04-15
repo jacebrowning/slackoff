@@ -1,7 +1,7 @@
 [tool.poetry]
 
 name = "slackoff"
-version = "0.1.1"
+version = "0.1.2"
 description = "Automatically sign out of Slack workspaces on macOS."
 
 license = "MIT"
@@ -46,7 +46,7 @@ black = "^22.1"
 isort = "^5.10"
 
 # Linters
-mypy = "~0.931"
+mypy = "~0.942"
 pydocstyle = "^6.1"
 pylint = "~2.13.4"
 types-setuptools = "*"
