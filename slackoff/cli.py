@@ -80,7 +80,8 @@ def attempt_signout(workspace) -> bool:
     if slack.signout(workspace):
         click.echo(f"Signed out of {workspace}")
         settings.deactivate(workspace)
-        time.sleep(2)
+        log.debug("Waiting for extra browser tabs")
+        time.sleep(5)
         browser.close()
         return True
 
