@@ -81,7 +81,7 @@ def attempt_signout(workspace) -> bool:
         click.echo(f"Signed out of {workspace}")
         settings.deactivate(workspace)
         log.debug("Waiting for extra browser tabs")
-        time.sleep(5)
+        time.sleep(10)
         browser.close()
         return True
 
