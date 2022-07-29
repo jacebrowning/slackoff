@@ -26,6 +26,7 @@ on signin(workspace)
     tell application "Google Chrome" to activate
     tell application "Google Chrome"
         tell active tab of front window
+            delay 1
             execute javascript "document.evaluate('//div[text()=\"" & workspace & "\"]', document).iterateNext().click();"
             delay 1
             execute javascript "document.querySelectorAll('[data-qa=\"ssb_multi_select_open_workspaces\"]')[0].click();"
@@ -44,5 +45,6 @@ on signout(workspace)
     tell application "Google Chrome"
         close every tab of window 1 whose title is equal to closeTab
     end tell
+    delay 3
     tell application "Slack" to activate
 end signout
