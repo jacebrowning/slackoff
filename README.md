@@ -2,7 +2,7 @@
 
 Slackoff is a quick way to sign out of a company Slack workspace at the end of the day to improve one's work-life balance. It can also be used to sign out of "fun" Slack workspaces to avoid distractions during normal working hours.
 
-[![Build Status](https://img.shields.io/github/workflow/status/jacebrowning/slackoff/main)](https://github.com/jacebrowning/slackoff/actions)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/jacebrowning/slackoff/main.yml?branch=main)](https://github.com/jacebrowning/slackoff/actions)
 [![Coverage Status](https://img.shields.io/codecov/c/gh/jacebrowning/slackoff)](https://codecov.io/gh/jacebrowning/slackoff)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/jacebrowning/slackoff.svg)](https://scrutinizer-ci.com/g/jacebrowning/slackoff)
 [![PyPI License](https://img.shields.io/pypi/l/slackoff.svg)](https://pypi.org/project/slackoff)
