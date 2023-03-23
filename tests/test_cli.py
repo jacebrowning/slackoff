@@ -17,5 +17,5 @@ def describe_cli():
         def it_can_force_signin(runner):
             result = runner.invoke(main, ["Foobar", "--signout"])
 
-            expect(result.exit_code) == 0
             expect(result.output) == "Currently signed out of Foobar\n"
+            expect(result.exit_code) == 0

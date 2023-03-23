@@ -52,8 +52,8 @@ def main(
         sys.exit(code)
 
     if signout:
-        code = 0 if attempt_signout(workspace) else 2
-        sys.exit(code)
+        attempt_signout(workspace)
+        sys.exit(0)
 
     if mute:
         code = 0 if attempt_mute(workspace, mute) else 2
