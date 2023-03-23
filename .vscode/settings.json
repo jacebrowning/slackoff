@@ -37,6 +37,7 @@
       "dataclasses",
       "Graphviz",
       "ipython",
+      "levelname",
       "mkdocs",
       "noclasses",
       "pipx",
@@ -47,6 +48,8 @@
       "signin",
       "signout",
       "slackoff",
+      "unmute",
+      "Unmuting",
       "venv",
       "verchew"
     ]

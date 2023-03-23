@@ -7,7 +7,6 @@ on activate()
     tell application "Slack" to activate
 end activate
 
-
 on ready(workspace)
     tell application "System Events"
         tell its process "Slack"
@@ -48,3 +47,73 @@ on signout(workspace)
     delay 3
     tell application "Slack" to activate
 end signout
+
+on mute(workspaceName, channelName)
+    tell application "System Events"
+        tell process "Slack"
+            set frontmost to true
+            delay 1
+
+--             -- Open the workspace switcher
+--             keystroke "Tab" using {control down, command down}
+--             delay 1
+--
+--             -- Type the workspace name to search
+--             keystroke workspaceName
+--             delay 1
+--
+--             -- Press Enter to switch to the workspace
+--             key code 36 -- Press Enter
+--             delay 1
+
+            -- Use the Quick Switcher to find the channel
+            keystroke "k" using {command down}
+            delay 1
+            keystroke channelName
+            delay 1
+            key code 36 -- Press Enter
+            delay 1
+
+            keystroke "/"
+            delay 1
+            keystroke "mute"
+            delay 1
+            key code 36 -- Press Enter
+        end tell
+    end tell
+end mute
+
+on unmute(workspaceName, channelName)
+    tell application "System Events"
+        tell process "Slack"
+            set frontmost to true
+            delay 1
+
+--             -- Open the workspace switcher
+--             keystroke "Tab" using {control down, command down}
+--             delay 1
+--
+--             -- Type the workspace name to search
+--             keystroke workspaceName
+--             delay 1
+--
+--             -- Press Enter to switch to the workspace
+--             key code 36 -- Press Enter
+--             delay 1
+
+            -- Use the Quick Switcher to find the channel
+            keystroke "k" using {command down}
+            delay 1
+            keystroke channelName
+            delay 1
+            key code 36 -- Press Enter
+            delay 1
+
+            keystroke "/"
+            delay 1
+            keystroke "unmute"
+            delay 1
+            key code 36 -- Press Enter
+        end tell
+    end tell
+end unmute
