@@ -1,10 +1,11 @@
+PROJECT := slackoff
 PACKAGE := slackoff
 MODULES := $(wildcard $(PACKAGE)/*.py)
 
 # MAIN TASKS ##################################################################
 
 .PHONY: all
-all: format check test mkdocs ## Run all tasks that determine CI status
+all: doctor format check test mkdocs ## Run all tasks that determine CI status
 
 .PHONY: dev
 dev: install .clean-test ## Continuously run CI tasks when files chanage
@@ -128,6 +129,7 @@ $(MKDOCS_INDEX): docs/requirements.txt mkdocs.yml docs/*.md
 docs/requirements.txt: poetry.lock
 	@ poetry export --with dev --without-hashes | grep mkdocs > $@
 	@ poetry export --with dev --without-hashes | grep pygments >> $@
+	@ poetry export --with dev --without-hashes | grep jinja2 >> $@
 
 .PHONY: uml
 uml: install docs/*.png
@@ -160,7 +162,6 @@ $(DIST_FILES): $(MODULES) pyproject.toml
 .PHONY: exe
 exe: install $(EXE_FILES)
 $(EXE_FILES): $(MODULES) $(PACKAGE).spec
-	# For framework/shared support: https://github.com/yyuu/pyenv/wiki
 	poetry run pyinstaller $(PACKAGE).spec --noconfirm --clean
 
 $(PACKAGE).spec:
@@ -172,7 +173,7 @@ $(PACKAGE).spec:
 upload: dist ## Upload the current version to PyPI
 	git diff --name-only --exit-code
 	poetry publish
-	bin/open https://pypi.org/project/$(PACKAGE)
+	bin/open https://pypi.org/project/$(PROJECT)
 
 # CLEANUP #####################################################################
 
