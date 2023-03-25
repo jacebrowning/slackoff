@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.1 (beta)
+
+- Added `--mute`/`--unmute` option to control specific channels.
+
 ## 1.0 (2023-02-14)
 
 - Initial stable release.

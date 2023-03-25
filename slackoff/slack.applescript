@@ -7,7 +7,6 @@ on activate()
     tell application "Slack" to activate
 end activate
 
-
 on ready(workspace)
     tell application "System Events"
         tell its process "Slack"
@@ -48,3 +47,47 @@ on signout(workspace)
     delay 3
     tell application "Slack" to activate
 end signout
+
+on mute(workspace, channel)
+    tell application "System Events"
+        tell process "Slack"
+            set frontmost to true
+            delay 1
+            -- Find channel
+            keystroke "k" using {command down}
+            delay 1
+            keystroke channel
+            delay 1
+            key code 36 -- Press Enter
+            delay 1
+            -- Mute channel
+            keystroke "/"
+            delay 1
+            keystroke "mute"
+            delay 1
+            key code 36 -- Press Enter
+        end tell
+    end tell
+end mute
+
+on unmute(workspace, channel)
+    tell application "System Events"
+        tell process "Slack"
+            set frontmost to true
+            delay 1
+            -- Find channel
+            keystroke "k" using {command down}
+            delay 1
+            keystroke channel
+            delay 1
+            key code 36 -- Press Enter
+            delay 1
+            -- Mute channel
+            keystroke "/"
+            delay 1
+            keystroke "unmute"
+            delay 1
+            key code 36 -- Press Enter
+        end tell
+    end tell
+end unmute

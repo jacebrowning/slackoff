@@ -10,6 +10,14 @@ from . import __version__, browser, slack
 from .config import settings
 
 
+def clean_channel(_ctx, _param, value: str | None) -> str:
+    if value is None:
+        return ""
+    if value := value.strip("# "):
+        return value
+    raise click.BadParameter("Invalid channel name.")
+
+
 @click.command(help="Automatically sign out/in of a Slack workspace.")
 @click.argument("workspace", nargs=-1)
 @click.option(
@@ -19,24 +27,42 @@ from .config import settings
     "-o", "--signout", is_flag=True, default=False, help="Only attempt to sign out."
 )
 @click.option(
+    "-m", "--mute", callback=clean_channel, help="Mute the specified channel."
+)
+@click.option(
+    "-u", "--unmute", callback=clean_channel, help="Unmute the specified channel."
+)
+@click.option(
     "--debug", is_flag=True, default=False, help="Show verbose logging output."
 )
 @click.version_option(__version__)
-def main(workspace: str, signin: bool, signout: bool, debug: bool):
+@click.help_option("-h", "--help")
+def main(
+    workspace: str, signin: bool, signout: bool, mute: str, unmute: str, debug: bool
+):
     log.init(debug=debug, format="%(levelname)s: %(message)s")
 
+    explicit = bool(workspace)
     workspace = get_workspace(workspace)
 
     if not (signin or signout) and not slack.activate():
         sys.exit(1)
 
     if signin:
-        attempt_signin(workspace)
-        sys.exit(0)
+        code = 0 if attempt_signin(workspace) else 2
+        sys.exit(code)
 
     if signout:
         attempt_signout(workspace)
         sys.exit(0)
+
+    if mute:
+        code = 0 if attempt_mute(workspace, explicit, mute) else 2
+        sys.exit(code)
+
+    if unmute:
+        code = 0 if attempt_unmute(workspace, explicit, unmute) else 2
+        sys.exit(code)
 
     if not attempt_signout(workspace):
         click.echo(f"Signing in to {workspace}")
@@ -87,6 +113,36 @@ def attempt_signout(workspace) -> bool:
 
     click.echo(f"Currently signed out of {workspace}")
     return False
+
+
+def attempt_mute(workspace: str, explicit: bool, channel: str) -> bool:
+    ready = slack.ready(workspace)
+    if explicit:
+        if not ready:
+            ready = attempt_signin(workspace)
+        if not ready:
+            click.echo(f"Workspace not available: {workspace}")
+            return False
+    elif not ready:
+        workspace = "current workspace"
+
+    click.echo(f"Muting #{channel} in {workspace}")
+    return slack.mute(workspace, channel)
+
+
+def attempt_unmute(workspace: str, explicit: bool, channel: str) -> bool:
+    ready = slack.ready(workspace)
+    if explicit:
+        if not ready:
+            ready = attempt_signin(workspace)
+        if not ready:
+            click.echo(f"Workspace not available: {workspace}")
+            return False
+    elif not ready:
+        workspace = "current workspace"
+
+    click.echo(f"Unmuting #{channel} in {workspace}")
+    return slack.unmute(workspace, channel)
 
 
 if __name__ == "__main__":  # pragma: no cover
