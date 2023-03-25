@@ -48,32 +48,19 @@ on signout(workspace)
     tell application "Slack" to activate
 end signout
 
-on mute(workspaceName, channelName)
+on mute(workspace, channel)
     tell application "System Events"
         tell process "Slack"
             set frontmost to true
             delay 1
-
---             -- Open the workspace switcher
---             keystroke "Tab" using {control down, command down}
---             delay 1
---
---             -- Type the workspace name to search
---             keystroke workspaceName
---             delay 1
---
---             -- Press Enter to switch to the workspace
---             key code 36 -- Press Enter
---             delay 1
-
-            -- Use the Quick Switcher to find the channel
+            -- Find channel
             keystroke "k" using {command down}
             delay 1
-            keystroke channelName
+            keystroke channel
             delay 1
             key code 36 -- Press Enter
             delay 1
-
+            -- Mute channel
             keystroke "/"
             delay 1
             keystroke "mute"
@@ -83,32 +70,19 @@ on mute(workspaceName, channelName)
     end tell
 end mute
 
-on unmute(workspaceName, channelName)
+on unmute(workspace, channel)
     tell application "System Events"
         tell process "Slack"
             set frontmost to true
             delay 1
-
---             -- Open the workspace switcher
---             keystroke "Tab" using {control down, command down}
---             delay 1
---
---             -- Type the workspace name to search
---             keystroke workspaceName
---             delay 1
---
---             -- Press Enter to switch to the workspace
---             key code 36 -- Press Enter
---             delay 1
-
-            -- Use the Quick Switcher to find the channel
+            -- Find channel
             keystroke "k" using {command down}
             delay 1
-            keystroke channelName
+            keystroke channel
             delay 1
             key code 36 -- Press Enter
             delay 1
-
+            -- Mute channel
             keystroke "/"
             delay 1
             keystroke "unmute"

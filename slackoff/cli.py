@@ -42,6 +42,7 @@ def main(
 ):
     log.init(debug=debug, format="%(levelname)s: %(message)s")
 
+    explicit = bool(workspace)
     workspace = get_workspace(workspace)
 
     if not (signin or signout) and not slack.activate():
@@ -56,11 +57,11 @@ def main(
         sys.exit(0)
 
     if mute:
-        code = 0 if attempt_mute(workspace, mute) else 2
+        code = 0 if attempt_mute(workspace, explicit, mute) else 2
         sys.exit(code)
 
     if unmute:
-        code = 0 if attempt_unmute(workspace, unmute) else 2
+        code = 0 if attempt_unmute(workspace, explicit, unmute) else 2
         sys.exit(code)
 
     if not attempt_signout(workspace):
@@ -114,25 +115,31 @@ def attempt_signout(workspace) -> bool:
     return False
 
 
-def attempt_mute(workspace: str, channel: str) -> bool:
+def attempt_mute(workspace: str, explicit: bool, channel: str) -> bool:
     ready = slack.ready(workspace)
-    if not ready:
-        ready = attempt_signin(workspace)
-    if not ready:
-        click.echo(f"Workspace not available: {workspace}")
-        return False
+    if explicit:
+        if not ready:
+            ready = attempt_signin(workspace)
+        if not ready:
+            click.echo(f"Workspace not available: {workspace}")
+            return False
+    elif not ready:
+        workspace = "current workspace"
 
     click.echo(f"Muting #{channel} in {workspace}")
     return slack.mute(workspace, channel)
 
 
-def attempt_unmute(workspace: str, channel: str) -> bool:
+def attempt_unmute(workspace: str, explicit: bool, channel: str) -> bool:
     ready = slack.ready(workspace)
-    if not ready:
-        ready = attempt_signin(workspace)
-    if not ready:
-        click.echo(f"Workspace not available: {workspace}")
-        return False
+    if explicit:
+        if not ready:
+            ready = attempt_signin(workspace)
+        if not ready:
+            click.echo(f"Workspace not available: {workspace}")
+            return False
+    elif not ready:
+        workspace = "current workspace"
 
     click.echo(f"Unmuting #{channel} in {workspace}")
     return slack.unmute(workspace, channel)
