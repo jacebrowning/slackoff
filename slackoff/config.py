@@ -1,10 +1,8 @@
-from dataclasses import dataclass
-
 import log
 from datafiles import datafile, field
 
 
-@dataclass
+@datafile
 class Workspace:
     name: str
     active: bool = True
@@ -12,7 +10,6 @@ class Workspace:
 
 
 @datafile("~/Library/Preferences/slackoff.yml")
-@dataclass
 class Settings:
     workspaces: list[Workspace] = field(default_factory=list)
 
