@@ -37,7 +37,7 @@ python = "^3.10"
 click = "^8.0"
 minilog = "^2.1"
 applescript = "^2021.2.9"
-datafiles = "^2.0"
+datafiles = "^2.1"
 pync = "^2.0.3"
 
 [tool.poetry.dev-dependencies]
