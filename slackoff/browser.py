@@ -23,13 +23,19 @@ DEFAULT = NAMES["com.google.chrome"]
 
 def detect(data: dict | None = None) -> str:
     if data is None:
-        with PREFERENCES.open("rb") as fp:
-            data = plistlib.load(fp)
+        if PREFERENCES.exists():
+            with PREFERENCES.open("rb") as fp:
+                data = plistlib.load(fp)
+        else:
+            log.debug(f"File not found: {PREFERENCES}")
+            data = {}
 
     for handler in data.get("LSHandlers", []):
         if handler.get("LSHandlerURLScheme") == "http":
             role = handler["LSHandlerRoleAll"]
-            return NAMES[role]
+            name = NAMES[role]
+            log.info(f"Detected default browser: {name}")
+            return name
 
     log.warn("Unable to determine the default browser")
     return DEFAULT
