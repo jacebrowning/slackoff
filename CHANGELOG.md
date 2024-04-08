@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.2 (2024-04-08)
+
+- Added support for Python 3.12.
+
 ## 1.1 (2024-02-04)
 
 - Added `--mute`/`--unmute` option to control specific channels.
