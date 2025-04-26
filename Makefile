@@ -8,7 +8,7 @@ MODULES := $(wildcard $(PACKAGE)/*.py)
 all: doctor format check test mkdocs ## Run all tasks that determine CI status
 
 .PHONY: dev
-dev: install .clean-test ## Continuously run CI tasks when files chanage
+dev: install .clean-test ## Continuously run CI tasks when files change
 	poetry run sniffer
 
 # SYSTEM DEPENDENCIES #########################################################
@@ -103,7 +103,7 @@ format: install
 	@ echo
 
 .PHONY: check
-check: install format ## Run formaters, linters, and static analysis
+check: install format ## Run formatters, linters, and static analysis
 ifdef CI
 	git diff --exit-code
 endif
