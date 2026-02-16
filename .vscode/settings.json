@@ -18,10 +18,7 @@
     "geckodriver.log": true
   },
   "python.defaultInterpreterPath": ".venv/bin/python",
-  "pylint.args": [
-    "--rcfile",
-    ".pylint.ini"
-  ],
+  "pylint.args": ["--rcfile", ".pylint.ini"],
   "editor.formatOnSave": true,
   "cSpell.words": [
     "applescript",
@@ -33,10 +30,12 @@
     "cygwin",
     "dataclasses",
     "exitfirst",
+    "freezegun",
     "Graphviz",
     "htmlcov",
     "ipython",
     "isort",
+    "Jace",
     "lastfailed",
     "launchservices",
     "levelname",
