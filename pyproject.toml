@@ -2,7 +2,7 @@
 
 name = "slackoff"
 version = "1.2"
-description = "Automatically sign out of Slack workspaces on macOS."
+description = "Automatically sign out of Slack workspaces."
 
 license = "MIT"
 

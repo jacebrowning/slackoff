@@ -18,7 +18,7 @@ def clean_channel(_ctx, _param, value: str | None) -> str:
     raise click.BadParameter("Invalid channel name.")
 
 
-@click.command(help="Automatically sign out/in of a Slack workspace.")
+@click.command(help="Automatically sign out of Slack workspaces.")
 @click.argument("workspace", nargs=-1)
 @click.option(
     "-i", "--signin", is_flag=True, default=False, help="Only attempt to sign in."
