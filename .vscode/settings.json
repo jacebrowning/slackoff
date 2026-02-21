@@ -31,6 +31,7 @@
     "dataclasses",
     "exitfirst",
     "freezegun",
+    "frontmost",
     "Graphviz",
     "htmlcov",
     "ipython",

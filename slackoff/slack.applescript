@@ -15,7 +15,11 @@ on ready(workspace)
     end tell
 end ready
 
-on signin(workspace)
+on signin(workspace, profileName)
+    if profileName is not "" then
+        do shell script "open -na 'Google Chrome' --args --profile-directory=" & quoted form of profileName
+        delay 2
+    end if
     tell application "System Events"
         tell its process "Slack"
             click menu item "Sign in to Another Workspace…" of menu 1 of menu item "Workspace" of menu 1 of menu bar item "File" of menu bar 1

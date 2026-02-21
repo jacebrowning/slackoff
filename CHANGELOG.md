@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.3 (2025-03-01)
+
+- Added support for alternate Chrome profiles.
+
 ## 1.2 (2024-04-08)
 
 - Added support for Python 3.12.
@@ -18,4 +22,4 @@
 
 ## 0.1 (2022-04-08)
 
- - Initial public release.
+- Initial public release.

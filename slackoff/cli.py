@@ -24,13 +24,28 @@ def clean_channel(_ctx, _param, value: str | None) -> str:
     "-i", "--signin", is_flag=True, default=False, help="Only attempt to sign in."
 )
 @click.option(
+    "-p",
+    "--profile",
+    metavar="NAME",
+    default=None,
+    help="Browser profile for sign in.",
+)
+@click.option(
     "-o", "--signout", is_flag=True, default=False, help="Only attempt to sign out."
 )
 @click.option(
-    "-m", "--mute", callback=clean_channel, help="Mute the specified channel."
+    "-m",
+    "--mute",
+    metavar="NAME",
+    callback=clean_channel,
+    help="Mute the specified channel.",
 )
 @click.option(
-    "-u", "--unmute", callback=clean_channel, help="Unmute the specified channel."
+    "-u",
+    "--unmute",
+    metavar="NAME",
+    callback=clean_channel,
+    help="Unmute the specified channel.",
 )
 @click.option(
     "--debug", is_flag=True, default=False, help="Show verbose logging output."
@@ -38,7 +53,13 @@ def clean_channel(_ctx, _param, value: str | None) -> str:
 @click.version_option(__version__)
 @click.help_option("-h", "--help")
 def main(
-    workspace: str, signin: bool, signout: bool, mute: str, unmute: str, debug: bool
+    workspace: str,
+    signin: bool,
+    profile: str | None,
+    signout: bool,
+    mute: str,
+    unmute: str,
+    debug: bool,
 ):
     log.init(debug=debug, format="%(levelname)s: %(message)s")
 
@@ -49,7 +70,11 @@ def main(
         sys.exit(1)
 
     if signin:
-        code = 0 if attempt_signin(workspace) else 2
+        try:
+            code = 0 if attempt_signin(workspace, profile) else 2
+        except ValueError as err:
+            click.echo(err, err=True)
+            sys.exit(2)
         sys.exit(code)
 
     if signout:
@@ -66,7 +91,11 @@ def main(
 
     if not attempt_signout(workspace):
         click.echo(f"Signing in to {workspace}")
-        attempt_signin(workspace)
+        try:
+            attempt_signin(workspace, profile)
+        except ValueError as err:
+            click.echo(err, err=True)
+            sys.exit(2)
 
 
 def get_workspace(workspace: str) -> str:
@@ -82,8 +111,14 @@ def get_workspace(workspace: str) -> str:
     return workspace
 
 
-def attempt_signin(workspace) -> bool:
-    if not slack.signin(workspace):
+def attempt_signin(workspace: str, profile: str | None = None) -> bool:
+    if profile is None:
+        profile = settings.get_profile(workspace)
+    if profile and browser.detect() != "Google Chrome":
+        raise ValueError(
+            "--profile is only supported when Chrome is the default browser"
+        )
+    if not slack.signin(workspace, profile=profile):
         message = f"Click 'Open' to sign in to {workspace}"
 
         if not slack.ready(workspace):
@@ -98,7 +133,7 @@ def attempt_signin(workspace) -> bool:
 
         browser.close()
 
-    settings.activate(workspace)
+    settings.activate(workspace, profile)
     return True
 
 
@@ -119,7 +154,7 @@ def attempt_mute(workspace: str, explicit: bool, channel: str) -> bool:
     ready = slack.ready(workspace)
     if explicit:
         if not ready:
-            ready = attempt_signin(workspace)
+            ready = attempt_signin(workspace, None)
         if not ready:
             click.echo(f"Workspace not available: {workspace}")
             return False
@@ -134,7 +169,7 @@ def attempt_unmute(workspace: str, explicit: bool, channel: str) -> bool:
     ready = slack.ready(workspace)
     if explicit:
         if not ready:
-            ready = attempt_signin(workspace)
+            ready = attempt_signin(workspace, None)
         if not ready:
             click.echo(f"Workspace not available: {workspace}")
             return False
