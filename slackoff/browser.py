@@ -34,7 +34,7 @@ def detect(data: dict | None = None) -> str:
         if handler.get("LSHandlerURLScheme") == "http":
             role = handler["LSHandlerRoleAll"]
             name = NAMES[role]
-            log.info(f"Detected default browser: {name}")
+            log.debug(f"Detected default browser: {name}")
             return name
 
     log.warn("Unable to determine the default browser")

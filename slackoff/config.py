@@ -3,6 +3,8 @@ from dataclasses import dataclass
 import log
 from datafiles import datafile, field
 
+PATH = "~/Library/Preferences/slackoff.yml"
+
 
 @dataclass
 class Workspace:
@@ -12,7 +14,7 @@ class Workspace:
     uses: int = 0
 
 
-@datafile("~/Library/Preferences/slackoff.yml")
+@datafile(PATH)
 @dataclass
 class Settings:
     workspaces: list[Workspace] = field(default_factory=list)

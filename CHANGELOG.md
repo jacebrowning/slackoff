@@ -1,6 +1,6 @@
 # Release Notes
 
-## 1.3 (2025-03-01)
+## 1.3 (2025-03-02)
 
 - Added support for alternate Chrome profiles.
 

@@ -1,13 +1,14 @@
 import sys
 import time
 from contextlib import suppress
+from pathlib import Path
 
 import click
 import log
 import pync
 
 from . import __version__, browser, slack
-from .config import settings
+from .config import PATH, settings
 
 
 def clean_channel(_ctx, _param, value: str | None) -> str:
@@ -48,6 +49,9 @@ def clean_channel(_ctx, _param, value: str | None) -> str:
     help="Unmute the specified channel.",
 )
 @click.option(
+    "--edit", is_flag=True, default=False, help="Open the configuration file."
+)
+@click.option(
     "--debug", is_flag=True, default=False, help="Show verbose logging output."
 )
 @click.version_option(__version__)
@@ -59,9 +63,15 @@ def main(
     signout: bool,
     mute: str,
     unmute: str,
+    edit: bool,
     debug: bool,
 ):
     log.init(debug=debug, format="%(levelname)s: %(message)s")
+
+    if edit:
+        path = Path(PATH).expanduser()
+        click.edit(filename=str(path))
+        sys.exit(0)
 
     explicit = bool(workspace)
     workspace = get_workspace(workspace)
