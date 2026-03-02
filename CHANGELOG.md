@@ -1,6 +1,14 @@
 # Release Notes
 
-## 1.1 (beta)
+## 1.3 (2025-03-02)
+
+- Added support for alternate Chrome profiles.
+
+## 1.2 (2024-04-08)
+
+- Added support for Python 3.12.
+
+## 1.1 (2024-02-04)
 
 - Added `--mute`/`--unmute` option to control specific channels.
 
@@ -14,4 +22,4 @@
 
 ## 0.1 (2022-04-08)
 
- - Initial public release.
+- Initial public release.

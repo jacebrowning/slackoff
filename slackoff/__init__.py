@@ -1,9 +1,9 @@
-from pkg_resources import DistributionNotFound, get_distribution
+from importlib.metadata import PackageNotFoundError, version
 
 try:
-    __version__ = get_distribution("slackoff").version
-except DistributionNotFound:
+    __version__ = version("slackoff")
+except PackageNotFoundError:
     __version__ = "(local)"
 
-del DistributionNotFound
-del get_distribution
+del PackageNotFoundError
+del version

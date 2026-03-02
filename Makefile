@@ -8,13 +8,13 @@ MODULES := $(wildcard $(PACKAGE)/*.py)
 all: doctor format check test mkdocs ## Run all tasks that determine CI status
 
 .PHONY: dev
-dev: install .clean-test ## Continuously run CI tasks when files chanage
+dev: install .clean-test ## Continuously run CI tasks when files change
 	poetry run sniffer
 
 # SYSTEM DEPENDENCIES #########################################################
 
-.PHONY: boostrap
-boostrap: ## Attempt to install system dependencies
+.PHONY: bootstrap
+bootstrap: ## Attempt to install system dependencies
 	asdf plugin add python || asdf plugin update python
 	asdf plugin add poetry https://github.com/asdf-community/asdf-poetry.git || asdf plugin update poetry
 	asdf install
@@ -31,7 +31,7 @@ DEPENDENCIES := $(VIRTUAL_ENV)/.poetry-$(shell bin/checksum pyproject.toml poetr
 .PHONY: install
 install: $(DEPENDENCIES) .cache ## Install project dependencies
 
-$(DEPENDENCIES): poetry.lock
+$(DEPENDENCIES): poetry.lock docs/requirements.txt
 	@ rm -rf $(VIRTUAL_ENV)/.poetry-*
 	@ poetry config virtualenvs.in-project true
 	poetry install
@@ -39,8 +39,14 @@ $(DEPENDENCIES): poetry.lock
 
 ifndef CI
 poetry.lock: pyproject.toml
-	poetry lock --no-update
+	poetry lock
 	@ touch $@
+
+docs/requirements.txt: poetry.lock
+	@ rm -f $@
+	@ poetry export --all-groups --without-hashes | grep mkdocs > $@
+	@ poetry export --all-groups --without-hashes | grep pygments >> $@
+	@ poetry export --all-groups --without-hashes | grep jinja2 >> $@
 endif
 
 .cache:
@@ -103,7 +109,7 @@ format: install
 	@ echo
 
 .PHONY: check
-check: install format ## Run formaters, linters, and static analysis
+check: install format ## Run formatters, linters, and static analysis
 ifdef CI
 	git diff --exit-code
 endif
@@ -124,18 +130,13 @@ endif
 
 .PHONY: mkdocs
 mkdocs: install $(MKDOCS_INDEX)
-$(MKDOCS_INDEX): docs/requirements.txt mkdocs.yml docs/*.md
+$(MKDOCS_INDEX): mkdocs.yml docs/*.md
 	@ mkdir -p docs/about
 	@ cd docs && ln -sf ../README.md index.md
 	@ cd docs/about && ln -sf ../../CHANGELOG.md changelog.md
 	@ cd docs/about && ln -sf ../../CONTRIBUTING.md contributing.md
 	@ cd docs/about && ln -sf ../../LICENSE.md license.md
 	poetry run mkdocs build --clean --strict
-
-docs/requirements.txt: poetry.lock
-	@ poetry export --with dev --without-hashes | grep mkdocs > $@
-	@ poetry export --with dev --without-hashes | grep pygments >> $@
-	@ poetry export --with dev --without-hashes | grep jinja2 >> $@
 
 .PHONY: uml
 uml: install docs/*.png
