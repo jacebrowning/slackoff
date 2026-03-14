@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 import log
-from datafiles import datafile, field
+from datafiles import datafile, field, frozen
 
 PATH = "~/Library/Preferences/slackoff.yml"
 
@@ -35,12 +35,13 @@ class Settings:
         return None
 
     def _update(self, name: str, active: bool, profile: str | None = None):
-        for workspace in self.workspaces:
-            if workspace.name == name:
-                workspace.active = active
-                if profile is not None:
-                    workspace.profile = profile
-                return workspace
+        with frozen(self):
+            for workspace in self.workspaces:
+                if workspace.name == name:
+                    workspace.active = active
+                    if profile is not None:
+                        workspace.profile = profile
+                    return workspace
 
         workspace = Workspace(name, profile or "", active, 0)
         self.workspaces.append(workspace)

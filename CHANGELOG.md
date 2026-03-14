@@ -1,6 +1,10 @@
 # Release Notes
 
-## 1.3 (2025-03-02)
+## 1.3.1 (2026-03-14)
+
+- Fixed internal tracking of Slack workspaces.
+
+## 1.3 (2026-03-02)
 
 - Added support for alternate Chrome profiles.
 
