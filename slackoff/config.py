@@ -1,12 +1,10 @@
-from dataclasses import dataclass
-
 import log
 from datafiles import datafile, field, frozen
 
 PATH = "~/Library/Preferences/slackoff.yml"
 
 
-@dataclass
+@datafile
 class Workspace:
     name: str
     profile: str = ""
@@ -15,7 +13,6 @@ class Workspace:
 
 
 @datafile(PATH)
-@dataclass
 class Settings:
     workspaces: list[Workspace] = field(default_factory=list)
 
