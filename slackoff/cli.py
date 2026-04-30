@@ -135,8 +135,16 @@ def attempt_signin(workspace: str, profile: str | None = None) -> bool:
             pync.notify(message, title="Slackoff")
             click.echo(message + "...")
 
+        deadline = time.monotonic() + 60
         with suppress(KeyboardInterrupt):
             while not slack.ready(workspace):
+                if time.monotonic() >= deadline:
+                    click.echo(
+                        f"Timed out after 60s waiting for workspace: {workspace}",
+                        err=True,
+                    )
+                    browser.close()
+                    return False
                 log.debug(f"Waiting for workspace: {workspace}")
                 time.sleep(1)
             click.echo(f"Signed in to of {workspace}")
